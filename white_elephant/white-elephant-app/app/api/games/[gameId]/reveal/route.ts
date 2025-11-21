@@ -21,6 +21,10 @@ export async function POST(
       return NextResponse.json({ error: 'Game not found' }, { status: 404 });
     }
 
+    if (game.status === 'ended') {
+      return NextResponse.json({ error: 'Game has ended' }, { status: 400 });
+    }
+    
     if (game.status !== 'active') {
       return NextResponse.json({ error: 'Game is not active' }, { status: 400 });
     }

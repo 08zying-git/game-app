@@ -21,6 +21,10 @@ export async function POST(
       return NextResponse.json({ error: 'Game not found' }, { status: 404 });
     }
 
+    if (game.status === 'ended') {
+      return NextResponse.json({ error: 'Game has ended' }, { status: 400 });
+    }
+    
     if (game.status !== 'active') {
       return NextResponse.json({ error: 'Game is not active' }, { status: 400 });
     }
@@ -187,7 +191,16 @@ export async function POST(
       }
     }
 
-    // Game will not end automatically - organizer must manually end it via the end game button
+    // Auto-end game if Player 1 just completed their final turn
+    const allRevealed = getAllGiftsRevealed(gameId);
+    if (allRevealed && participant.player_number === 1) {
+      // Player 1 just completed their final steal, end the game
+      db.prepare(`
+        UPDATE games 
+        SET status = 'ended', ended_at = datetime('now')
+        WHERE id = ?
+      `).run(gameId);
+    }
 
     return NextResponse.json({ message: 'Gift stolen successfully' });
   } catch (error: any) {
