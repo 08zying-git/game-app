@@ -1,0 +1,11 @@
+{
+  "servers": {
+    "captain": {
+      "type": "stdio",
+      "command": "captain",
+      "args": [
+        "start"
+      ]
+    }
+  }
+}
