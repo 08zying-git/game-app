@@ -192,8 +192,8 @@ export async function POST(
     }
 
     // Auto-end game if Player 1 just completed their final turn
-    const allRevealed = getAllGiftsRevealed(gameId);
-    if (allRevealed && participant.player_number === 1) {
+    const allGiftsRevealed = getAllGiftsRevealed(gameId);
+    if (allGiftsRevealed && participant.player_number === 1) {
       // Player 1 just completed their final steal, end the game
       db.prepare(`
         UPDATE games 
