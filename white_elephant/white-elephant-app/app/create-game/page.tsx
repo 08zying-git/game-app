@@ -61,7 +61,7 @@ export default function CreateGamePage() {
 
         <form onSubmit={handleSubmit} className="space-y-6">
           <div>
-            <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">
+            <label htmlFor="name" className="block text-base font-semibold text-black mb-1">
               Game Name *
             </label>
             <input
@@ -76,7 +76,7 @@ export default function CreateGamePage() {
           </div>
 
           <div>
-            <label htmlFor="description" className="block text-sm font-medium text-gray-700 mb-1">
+            <label htmlFor="description" className="block text-base font-semibold text-black mb-1">
               Description
             </label>
             <textarea
@@ -90,7 +90,7 @@ export default function CreateGamePage() {
           </div>
 
           <div>
-            <label htmlFor="deadline" className="block text-sm font-medium text-gray-700 mb-1">
+            <label htmlFor="deadline" className="block text-base font-semibold text-black mb-1">
               Gift Submission Deadline
             </label>
             <input
@@ -103,7 +103,7 @@ export default function CreateGamePage() {
           </div>
 
           <div>
-            <label htmlFor="maxSteals" className="block text-sm font-medium text-gray-700 mb-1">
+            <label htmlFor="maxSteals" className="block text-base font-semibold text-black mb-1">
               Max Steals Per Gift
             </label>
             <input
@@ -126,7 +126,7 @@ export default function CreateGamePage() {
               onChange={(e) => setAllowImmediateStealBack(e.target.checked)}
               className="h-4 w-4 text-red-600 focus:ring-red-500 border-gray-300 rounded"
             />
-            <label htmlFor="allowImmediateStealBack" className="ml-2 block text-sm text-gray-700">
+            <label htmlFor="allowImmediateStealBack" className="ml-2 block text-base text-black">
               Allow immediate steal-back (player can steal back their gift right away)
             </label>
           </div>
@@ -139,7 +139,7 @@ export default function CreateGamePage() {
               onChange={(e) => setFinalStealRound(e.target.checked)}
               className="h-4 w-4 text-red-600 focus:ring-red-500 border-gray-300 rounded"
             />
-            <label htmlFor="finalStealRound" className="ml-2 block text-sm text-gray-700">
+            <label htmlFor="finalStealRound" className="ml-2 block text-base text-black">
               Final steal round (Player #1 gets one more chance after all gifts are revealed)
             </label>
           </div>
