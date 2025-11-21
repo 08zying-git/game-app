@@ -197,8 +197,11 @@ export default function GamePage() {
   const turnPlayerUserId = participants.find(p => p.player_number === game.current_turn)?.user_id;
   
   // Check if only one gift remains and it's the current player's own gift
-  const onlyMyGiftRemains = unrevealedGifts.length === 1 && 
-    currentPlayerUserId && unrevealedGifts[0].user_id === currentPlayerUserId;
+  const onlyMyGiftRemains = Boolean(
+    unrevealedGifts.length === 1 && 
+    currentPlayerUserId && 
+    unrevealedGifts[0].user_id === currentPlayerUserId
+  );
 
   const canStealGiftClient = (gift: Gift): boolean => {
     if (!currentPlayerUserId) return false;
