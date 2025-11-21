@@ -33,7 +33,7 @@ export default function GiftGrid({
   return (
     <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
       {gifts.map((gift) => {
-        const isMyGift = currentUserId && gift.user_id === currentUserId;
+        const isMyGift = Boolean(currentUserId && gift.user_id === currentUserId);
         const canReveal = canRevealGift ? canRevealGift(gift) : true;
         return (
           <GiftCard
