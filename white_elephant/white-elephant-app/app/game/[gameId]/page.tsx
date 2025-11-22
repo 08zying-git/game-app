@@ -206,6 +206,14 @@ export default function GamePage() {
   const canStealGiftClient = (gift: Gift): boolean => {
     if (!currentPlayerUserId) return false;
     
+    // Check if player's gift was stolen and they must reveal
+    const playerOwnsAnyGift = gifts.some(g => g.current_owner_id === currentPlayerUserId);
+    const playerPreviouslyOwned = gifts.some(g => g.previous_owner_id === currentPlayerUserId);
+    const mustReveal = isCurrentPlayer && !playerOwnsAnyGift && playerPreviouslyOwned && unrevealedGifts.length > 0;
+    
+    // If player must reveal (their gift was stolen), they cannot steal
+    if (mustReveal) return false;
+    
     // Can't steal own gift (if you currently own it)
     if (gift.current_owner_id === currentPlayerUserId) return false;
     
@@ -214,9 +222,6 @@ export default function GamePage() {
     
     // Can't steal unrevealed gifts
     if (!gift.is_revealed || gift.is_revealed === 0) return false;
-    
-    // Players can steal any revealed gift as long as it hasn't exceeded max steals
-    // The "needsToReveal" flag (shown separately) indicates when a player MUST reveal
     
     return true;
   };

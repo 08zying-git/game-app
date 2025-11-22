@@ -67,10 +67,13 @@ export default function GiftCard({
     );
   }
 
+  // Gray out revealed gifts if current player cannot steal them
+  const isStealDisabled = isRevealed && isCurrentPlayer && !canSteal;
+  
   return (
     <div className={`bg-white rounded-lg shadow-md p-4 border-2 border-gray-200 transition ${
-      isDisabled 
-        ? 'opacity-50 grayscale' 
+      isDisabled || isStealDisabled
+        ? 'opacity-50 grayscale cursor-not-allowed' 
         : isExceptionCase
         ? 'border-blue-300 hover:shadow-lg'
         : 'hover:shadow-lg'
@@ -114,7 +117,10 @@ export default function GiftCard({
         {isDisabled && (
           <p className="mt-2 text-xs text-gray-500 italic">Your gift</p>
         )}
-        {isCurrentPlayer && canSteal && onSteal && !isDisabled && (
+        {isStealDisabled && (
+          <p className="mt-2 text-xs text-gray-500 italic">You must reveal a new gift first</p>
+        )}
+        {isCurrentPlayer && canSteal && onSteal && !isDisabled && !isStealDisabled && (
           <button
             onClick={onSteal}
             className="mt-2 w-full bg-red-600 text-white py-1 px-3 rounded text-sm hover:bg-red-700"
